@@ -2,9 +2,12 @@ import React from "react";
 
 export default function Navbar({ darkMode, toggleDarkMode, onViewBookings }) {
   return (
-    <nav className={`w-full px-6 py-4 flex justify-between items-center shadow-md ${darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-800"}`}>
+    <nav
+      className={`w-full px-6 py-4 flex justify-between items-center shadow-md ${
+        darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-800"
+      }`}
+    >
       <h1 className="text-2xl font-bold">🌍 Travel Explorer</h1>
-
       <div className="flex gap-4 items-center">
         <button
           onClick={onViewBookings}

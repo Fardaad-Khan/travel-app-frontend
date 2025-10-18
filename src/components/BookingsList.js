@@ -38,9 +38,7 @@ export default function BookingsList({ onClose }) {
         {loading ? (
           <p className="text-gray-500 dark:text-gray-400">Loading bookings...</p>
         ) : bookings.length === 0 ? (
-          <p className="text-gray-500 dark:text-gray-400">
-            You have no bookings yet.
-          </p>
+          <p className="text-gray-500 dark:text-gray-400">No bookings yet.</p>
         ) : (
           <ul className="space-y-3 max-h-80 overflow-y-auto">
             {bookings.map((b) => (
@@ -50,7 +48,7 @@ export default function BookingsList({ onClose }) {
               >
                 <p className="font-semibold">{b.destination}</p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  {b.days} days – for {b.customer_name}
+                  {b.days} days — for {b.customer_name}
                 </p>
               </li>
             ))}

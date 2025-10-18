@@ -9,22 +9,31 @@ export default function BookingModal({ selected, onClose }) {
 
   const handleBook = async () => {
     try {
-      const payload = { destination: selected.name, days: Number(days), customer_name: name };
-      await axios.post(`${API_BASE}/bookings/`, payload);
-      alert("Booking confirmed!");
+      const token = localStorage.getItem("token");
+      const payload = {
+        destination: selected.name,
+        days: Number(days),
+        customer_name: name,
+      };
+
+      await axios.post(`${API_BASE}/bookings/`, payload, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      alert("✅ Booking saved successfully!");
       onClose();
     } catch (error) {
-      console.error(error);
-      alert("Error booking trip!");
+      console.error("🔥 Booking error:", error.response?.data || error.message);
+      alert("❌ Booking error — please check backend or login again.");
     }
   };
 
   if (!selected) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex justify-center items-center">
-      <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-xl w-96">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
+    <div className="fixed inset-0 bg-black/60 flex justify-center items-center backdrop-blur-sm z-50">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl w-[420px]">
+        <h2 className="text-2xl font-semibold mb-4 text-blue-700 dark:text-blue-300 text-center">
           Book your trip to {selected.name}
         </h2>
         <input
@@ -44,7 +53,10 @@ export default function BookingModal({ selected, onClose }) {
           <button onClick={onClose} className="px-4 py-2 border rounded-lg">
             Cancel
           </button>
-          <button onClick={handleBook} className="bg-blue-600 text-white px-4 py-2 rounded-lg">
+          <button
+            onClick={handleBook}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+          >
             Confirm
           </button>
         </div>
