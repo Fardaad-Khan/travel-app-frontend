@@ -8,32 +8,44 @@ export default function Navbar({
 }) {
   return (
     <nav
-      className={`w-full px-8 py-4 flex justify-between items-center shadow-md ${
-        darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-800"
+      className={`w-full px-8 py-4 flex justify-between items-center shadow-lg sticky top-0 z-50 transition-colors duration-300 ${
+        darkMode
+          ? "bg-gray-900 text-white"
+          : "bg-gradient-to-r from-blue-400 to-purple-500 text-white"
       }`}
     >
-      <h1 className="text-2xl font-bold tracking-wide text-blue-600 dark:text-blue-300">
-        🌍 Travel Explorer
+      {/* Logo / Title */}
+      <h1 className="text-2xl md:text-3xl font-bold tracking-wider drop-shadow-lg flex items-center gap-2">
+        🌍 Travel Next
       </h1>
 
-      <div className="flex gap-5 items-center text-sm font-medium">
+      {/* Nav Buttons */}
+      <div className="flex gap-4 md:gap-6 items-center text-sm md:text-base font-medium">
         <button
           onClick={onViewBookings}
-          className="hover:text-blue-600 dark:hover:text-blue-400 transition"
+          className={`px-3 py-1 rounded-lg hover:scale-105 transition transform ${
+            darkMode
+              ? "hover:bg-gray-700"
+              : "hover:bg-white hover:text-purple-600"
+          }`}
         >
           My Bookings
         </button>
 
         <button
           onClick={toggleDarkMode}
-          className="px-3 py-1 border rounded-lg hover:bg-blue-100 dark:hover:bg-gray-700 transition"
+          className={`px-3 py-1 border rounded-lg hover:scale-105 transition transform ${
+            darkMode
+              ? "border-gray-500 hover:bg-gray-700"
+              : "border-white hover:bg-white hover:text-purple-600"
+          }`}
         >
           {darkMode ? "☀️ Light" : "🌙 Dark"}
         </button>
 
         <button
           onClick={onLogout}
-          className="px-4 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+          className="px-4 py-1 bg-red-500 hover:bg-red-600 rounded-lg text-white transition transform hover:scale-105 shadow-md"
         >
           Logout
         </button>
