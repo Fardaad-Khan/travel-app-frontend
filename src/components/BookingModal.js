@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const API_BASE = "https://travel-app-a9mw.onrender.com";
+const API_BASE = "https://travel-app-1-1lq9.onrender.com";
 
 export default function BookingModal({ selected, onClose }) {
   const [name, setName] = useState("");

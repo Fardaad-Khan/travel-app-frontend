@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 // Your backend API (Render)
-const API_BASE = "https://travel-app-a9mw.onrender.com";
+const API_BASE = "https://travel-app-1-1lq9.onrender.com";
 
 export default function LoginForm({ onLogin }) {
   const [isRegister, setIsRegister] = useState(false);
