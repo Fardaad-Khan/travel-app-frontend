@@ -10,10 +10,13 @@ export default function DestinationGrid({ destinations, onBook }) {
         >
           <div className="relative h-52">
             <img
-              src={`https://source.unsplash.com/400x250/?${place.name}`}
-              alt={place.name}
-              className="w-full h-full object-cover rounded-t-3xl"
-            />
+  src={place.image}
+  alt={place.name}
+  className="w-full h-full object-cover rounded-t-3xl"
+  onError={(e) => {
+    e.target.src = place.fallbackImage || `https://source.unsplash.com/400x250/?${place.name}`;
+  }}
+/>
             {/* Overlay gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent rounded-t-3xl"></div>
             <h2 className="absolute bottom-4 left-4 text-white text-xl font-bold drop-shadow-lg">
