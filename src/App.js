@@ -14,7 +14,6 @@ import parisImg from "./assets/paris.jpg";
 import sydneyImg from "./assets/sydney.jpg";
 import dubaiImg from "./assets/dubai.jpg";
 
-
 // Import the travel background image from src/assets
 import travelBg from "./assets/travel-bg.jpg";
 
@@ -59,16 +58,22 @@ function App() {
   }, [darkMode]);
 
   useEffect(() => {
-    // Enhanced destinations using your local images and fallback online images
-    const dests = [
+    // Expanded list of destinations around the world
+    // Rotate between the 4 images
+    const images = [tokyoImg, parisImg, sydneyImg, dubaiImg];
+    const fallbackImages = [
+      "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&h=600&fit=crop"
+    ];
+
+    const destList = [
       {
         id: 1,
         name: "Tokyo",
         lat: 35.6895,
         lng: 139.6917,
-        // Use local image from public/assets folder
-        image: tokyoImg,
-        fallbackImage: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&h=600&fit=crop",
         description: "A vibrant mix of modern life and ancient tradition.",
         price: "$2,299",
         rating: 4.9,
@@ -80,8 +85,6 @@ function App() {
         name: "Paris",
         lat: 48.8566,
         lng: 2.3522,
-        image: parisImg,
-        fallbackImage: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=600&fit=crop",
         description: "The city of lights, romance, and exquisite cuisine.",
         price: "$1,899",
         rating: 4.8,
@@ -93,8 +96,6 @@ function App() {
         name: "Sydney",
         lat: -33.8688,
         lng: 151.2093,
-        image: sydneyImg,
-        fallbackImage: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800&h=600&fit=crop",
         description: "Harbor views, beaches, and the iconic Opera House.",
         price: "$1,799",
         rating: 4.7,
@@ -106,16 +107,308 @@ function App() {
         name: "Dubai",
         lat: 25.2048,
         lng: 55.2708,
-        image: dubaiImg,
-        fallbackImage: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&h=600&fit=crop",
         description: "A city of luxury, innovation, and desert beauty.",
         price: "$1,599",
         rating: 4.8,
         duration: "5 days",
         highlights: ["Burj Khalifa", "Dubai Mall", "Desert Safari"]
       },
+      {
+        id: 5,
+        name: "New York",
+        lat: 40.7128,
+        lng: -74.0060,
+        description: "The city that never sleeps, with iconic skyscrapers.",
+        price: "$2,099",
+        rating: 4.8,
+        duration: "6 days",
+        highlights: ["Statue of Liberty", "Times Square", "Central Park"]
+      },
+      {
+        id: 6,
+        name: "London",
+        lat: 51.5074,
+        lng: -0.1278,
+        description: "Historic landmarks and modern culture in the UK capital.",
+        price: "$1,999",
+        rating: 4.7,
+        duration: "5 days",
+        highlights: ["Big Ben", "Buckingham Palace", "British Museum"]
+      },
+      {
+        id: 7,
+        name: "Rome",
+        lat: 41.9028,
+        lng: 12.4964,
+        description: "Ancient ruins and delicious Italian cuisine.",
+        price: "$1,799",
+        rating: 4.9,
+        duration: "7 days",
+        highlights: ["Colosseum", "Vatican City", "Trevi Fountain"]
+      },
+      {
+        id: 8,
+        name: "Barcelona",
+        lat: 41.3851,
+        lng: 2.1734,
+        description: "Gaudi's architecture and vibrant beach life.",
+        price: "$1,699",
+        rating: 4.8,
+        duration: "5 days",
+        highlights: ["Sagrada Familia", "Park Guell", "La Rambla"]
+      },
+      {
+        id: 9,
+        name: "Rio de Janeiro",
+        lat: -22.9068,
+        lng: -43.1729,
+        description: "Beaches, carnival, and Christ the Redeemer.",
+        price: "$1,899",
+        rating: 4.7,
+        duration: "6 days",
+        highlights: ["Copacabana Beach", "Sugarloaf Mountain", "Christ the Redeemer"]
+      },
+      {
+        id: 10,
+        name: "Cape Town",
+        lat: -33.9249,
+        lng: 18.4241,
+        description: "Stunning landscapes and Table Mountain.",
+        price: "$1,799",
+        rating: 4.8,
+        duration: "7 days",
+        highlights: ["Table Mountain", "Robben Island", "Cape of Good Hope"]
+      },
+      {
+        id: 11,
+        name: "Bangkok",
+        lat: 13.7563,
+        lng: 100.5018,
+        description: "Temples, street food, and bustling markets.",
+        price: "$1,299",
+        rating: 4.6,
+        duration: "5 days",
+        highlights: ["Grand Palace", "Wat Arun", "Chatuchak Market"]
+      },
+      {
+        id: 12,
+        name: "Istanbul",
+        lat: 41.0082,
+        lng: 28.9784,
+        description: "Where East meets West, with historic mosques.",
+        price: "$1,499",
+        rating: 4.8,
+        duration: "6 days",
+        highlights: ["Hagia Sophia", "Blue Mosque", "Grand Bazaar"]
+      },
+      {
+        id: 13,
+        name: "Hong Kong",
+        lat: 22.3964,
+        lng: 114.1095,
+        description: "Skyscrapers, harbors, and dim sum delights.",
+        price: "$1,999",
+        rating: 4.7,
+        duration: "5 days",
+        highlights: ["Victoria Peak", "Star Ferry", "Temple Street Market"]
+      },
+      {
+        id: 14,
+        name: "Singapore",
+        lat: 1.3521,
+        lng: 103.8198,
+        description: "Modern city-state with gardens and marina.",
+        price: "$2,099",
+        rating: 4.9,
+        duration: "4 days",
+        highlights: ["Marina Bay Sands", "Gardens by the Bay", "Sentosa Island"]
+      },
+      {
+        id: 15,
+        name: "Amsterdam",
+        lat: 52.3676,
+        lng: 4.9041,
+        description: "Canals, bicycles, and world-class museums.",
+        price: "$1,899",
+        rating: 4.8,
+        duration: "5 days",
+        highlights: ["Anne Frank House", "Rijksmuseum", "Vondelpark"]
+      },
+      {
+        id: 16,
+        name: "Prague",
+        lat: 50.0755,
+        lng: 14.4378,
+        description: "Fairy-tale architecture and historic charm.",
+        price: "$1,599",
+        rating: 4.7,
+        duration: "6 days",
+        highlights: ["Prague Castle", "Charles Bridge", "Old Town Square"]
+      },
+      {
+        id: 17,
+        name: "Vienna",
+        lat: 48.2082,
+        lng: 16.3738,
+        description: "Imperial palaces and classical music.",
+        price: "$1,799",
+        rating: 4.8,
+        duration: "5 days",
+        highlights: ["Schonbrunn Palace", "St. Stephen's Cathedral", "Vienna Opera House"]
+      },
+      {
+        id: 18,
+        name: "Berlin",
+        lat: 52.5200,
+        lng: 13.4050,
+        description: "History, street art, and vibrant nightlife.",
+        price: "$1,699",
+        rating: 4.7,
+        duration: "6 days",
+        highlights: ["Brandenburg Gate", "Berlin Wall", "Museum Island"]
+      },
+      {
+        id: 19,
+        name: "Moscow",
+        lat: 55.7558,
+        lng: 37.6173,
+        description: "Red Square, Kremlin, and onion domes.",
+        price: "$1,899",
+        rating: 4.6,
+        duration: "7 days",
+        highlights: ["Red Square", "Kremlin", "St. Basil's Cathedral"]
+      },
+      {
+        id: 20,
+        name: "Cairo",
+        lat: 30.0444,
+        lng: 31.2357,
+        description: "Ancient pyramids and the Nile River.",
+        price: "$1,499",
+        rating: 4.8,
+        duration: "6 days",
+        highlights: ["Pyramids of Giza", "Sphinx", "Egyptian Museum"]
+      },
+      {
+        id: 21,
+        name: "Machu Picchu",
+        lat: -13.1631,
+        lng: -72.5450,
+        description: "Ancient Incan ruins in the Andes.",
+        price: "$2,499",
+        rating: 4.9,
+        duration: "8 days",
+        highlights: ["Inca Trail", "Sun Gate", "Temple of the Sun"]
+      },
+      {
+        id: 22,
+        name: "Great Wall of China",
+        lat: 40.4319,
+        lng: 116.5704,
+        description: "Iconic ancient fortification spanning mountains.",
+        price: "$2,199",
+        rating: 4.9,
+        duration: "7 days",
+        highlights: ["Mutianyu Section", "Jinshanling", "Badaling"]
+      },
+      {
+        id: 23,
+        name: "Taj Mahal",
+        lat: 27.1751,
+        lng: 78.0421,
+        description: "Marble mausoleum of eternal love.",
+        price: "$1,799",
+        rating: 4.9,
+        duration: "5 days",
+        highlights: ["Agra Fort", "Mehtab Bagh", "Itmad-ud-Daulah"]
+      },
+      {
+        id: 24,
+        name: "Bora Bora",
+        lat: -16.5004,
+        lng: -151.7415,
+        description: "Overwater bungalows and turquoise lagoons.",
+        price: "$3,999",
+        rating: 4.9,
+        duration: "7 days",
+        highlights: ["Mount Otemanu", "Matira Beach", "Coral Gardens"]
+      },
+      {
+        id: 25,
+        name: "Grand Canyon",
+        lat: 36.1069,
+        lng: -112.1129,
+        description: "Vast natural wonder carved by the Colorado River.",
+        price: "$1,599",
+        rating: 4.8,
+        duration: "5 days",
+        highlights: ["South Rim", "Bright Angel Trail", "Havasu Falls"]
+      },
+      {
+        id: 26,
+        name: "Santorini",
+        lat: 36.3932,
+        lng: 25.4615,
+        description: "White-washed buildings and stunning sunsets.",
+        price: "$2,299",
+        rating: 4.9,
+        duration: "6 days",
+        highlights: ["Oia Village", "Akrotiri", "Red Beach"]
+      },
+      {
+        id: 27,
+        name: "Kyoto",
+        lat: 35.0116,
+        lng: 135.7681,
+        description: "Traditional temples and cherry blossoms.",
+        price: "$2,099",
+        rating: 4.8,
+        duration: "7 days",
+        highlights: ["Fushimi Inari", "Kinkaku-ji", "Arashiyama Bamboo Grove"]
+      },
+      {
+        id: 28,
+        name: "Venice",
+        lat: 45.4408,
+        lng: 12.3155,
+        description: "Romantic canals and gondola rides.",
+        price: "$2,199",
+        rating: 4.7,
+        duration: "5 days",
+        highlights: ["St. Mark's Square", "Rialto Bridge", "Doge's Palace"]
+      },
+      {
+        id: 29,
+        name: "Seoul",
+        lat: 37.5665,
+        lng: 126.9780,
+        description: "Modern tech hub with ancient palaces.",
+        price: "$1,799",
+        rating: 4.8,
+        duration: "6 days",
+        highlights: ["Gyeongbokgung Palace", "N Seoul Tower", "Myeongdong"]
+      },
+      {
+        id: 30,
+        name: "Mexico City",
+        lat: 19.4326,
+        lng: -99.1332,
+        description: "Vibrant culture and Aztec ruins.",
+        price: "$1,499",
+        rating: 4.7,
+        duration: "5 days",
+        highlights: ["Zocalo", "Teotihuacan", "Chapultepec Castle"]
+      }
     ];
-    setDestinations(dests);
+
+    // Assign rotating images
+    const enhancedDests = destList.map((dest, index) => ({
+      ...dest,
+      image: images[index % 4],
+      fallbackImage: fallbackImages[index % 4]
+    }));
+
+    setDestinations(enhancedDests);
     setLoading(false);
   }, []);
 
@@ -129,19 +422,20 @@ function App() {
     setMapCenter([destination.lat, destination.lng]);
   };
 
-  // Filter destinations based on search
+  // Filter destinations based on search - now works with the expanded list
   const filteredDestinations = destinations.filter(dest =>
     dest.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    dest.description.toLowerCase().includes(searchQuery.toLowerCase())
+    dest.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    dest.highlights.some(h => h.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   if (!token) return <LoginForm onLogin={(t) => setToken(t)} darkMode={darkMode} />;
 
   return (
-    <div className={`min-h-screen transition-all duration-300 ${
+    <div className={`min-h-screen transition-all duration-300 font-sans ${
       darkMode 
-        ? "dark bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100" 
-        : "bg-gradient-to-br from-blue-50 via-white to-purple-50 text-gray-800"
+        ? "dark bg-gray-900 text-gray-100" 
+        : "bg-white text-gray-800"
     }`}>
       <Navbar
         darkMode={darkMode}
@@ -150,9 +444,9 @@ function App() {
         onLogout={handleLogout}
       />
 
-      {/* Hero Section with Local Background Image */}
+      {/* Hero Section with Local Background Image - Improved aesthetics: softer overlay, better typography */}
       <section
-        className="relative flex items-center justify-center h-[600px] text-center overflow-hidden"
+        className="relative flex items-center justify-center h-[700px] text-center overflow-hidden"
         style={{
           backgroundImage: `url(${travelBg})`,
           backgroundSize: "cover",
@@ -160,45 +454,45 @@ function App() {
           backgroundAttachment: "fixed"
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/60"></div>
-        <div className="relative z-10 px-4 animate-fadeInUp">
-          <h1 className="text-6xl md:text-7xl font-extrabold text-white mb-6 drop-shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/50"></div>
+        <div className="relative z-10 px-6 animate-fadeInUp max-w-4xl">
+          <h1 className="text-5xl md:text-7xl font-serif font-bold text-white mb-6 drop-shadow-xl tracking-tight">
             ✈️ Travel Next
           </h1>
-          <p className="text-xl md:text-2xl text-white/95 max-w-3xl mx-auto mb-8 drop-shadow-lg">
-            Discover stunning destinations, trusted service, and unforgettable experiences worldwide.
+          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10 drop-shadow-md leading-relaxed">
+            Embark on journeys that inspire, with handpicked destinations and seamless experiences.
           </p>
           <div className="flex justify-center">
             <input
               type="text"
-              placeholder="🔍 Search destinations..."
+              placeholder="🔍 Search for your dream destination..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="px-6 py-3 rounded-full w-full max-w-md text-gray-800 shadow-2xl focus:outline-none focus:ring-4 focus:ring-blue-400/50 transition-all"
+              className="px-6 py-4 rounded-full w-full max-w-lg text-gray-800 shadow-xl focus:outline-none focus:ring-2 focus:ring-white/50 transition-all bg-white/90"
             />
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-12 px-6">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
+      {/* Stats Section - Improved: cleaner cards, subtle animations, neutral colors */}
+      <section className="py-16 px-6 bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-800">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
           {[
             { number: "50+", label: "Destinations", icon: "🌍" },
             { number: "10K+", label: "Happy Travelers", icon: "😊" },
             { number: "4.8", label: "Average Rating", icon: "⭐" },
             { number: "24/7", label: "Support", icon: "💬" }
           ].map((stat, idx) => (
-            <div key={idx} className={`text-center p-6 rounded-2xl transition-all hover:scale-105 ${
+            <div key={idx} className={`text-center p-8 rounded-xl transition-all hover:scale-105 hover:shadow-lg ${
               darkMode 
-                ? "bg-gray-800/50 backdrop-blur" 
-                : "bg-white/80 backdrop-blur shadow-lg"
+                ? "bg-gray-800/70" 
+                : "bg-white/70 shadow-md"
             }`}>
-              <div className="text-4xl mb-2">{stat.icon}</div>
-              <div className="text-3xl font-bold mb-1 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+              <div className="text-5xl mb-3">{stat.icon}</div>
+              <div className="text-4xl font-semibold mb-1 text-gray-800 dark:text-gray-100">
                 {stat.number}
               </div>
-              <div className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
+              <div className={`text-base font-medium ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
                 {stat.label}
               </div>
             </div>
@@ -206,12 +500,12 @@ function App() {
         </div>
       </section>
 
-      {/* Why Choose Us Cards */}
-      <section className="py-12 px-6">
-        <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+      {/* Why Choose Us Cards - Improved: more elegant design, softer gradients, better spacing */}
+      <section className="py-16 px-6">
+        <h2 className="text-4xl font-serif font-bold text-center mb-12 text-gray-800 dark:text-gray-100">
           Why Choose Travel Next?
         </h2>
-        <div className="flex flex-col md:flex-row justify-center items-center gap-6 max-w-6xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-center items-stretch gap-8 max-w-7xl mx-auto">
           {[
             { 
               icon: "🌏", 
@@ -231,21 +525,19 @@ function App() {
           ].map((item, idx) => (
             <div 
               key={idx} 
-              className={`group relative overflow-hidden rounded-3xl p-8 w-full md:w-80 text-center transition-all duration-300 hover:scale-105 hover:-translate-y-2 ${
+              className={`group relative overflow-hidden rounded-2xl p-8 flex flex-col items-center text-center transition-all duration-300 hover:scale-105 ${
                 darkMode 
-                  ? "bg-gradient-to-br from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600" 
-                  : "bg-gradient-to-br from-white to-gray-50 shadow-xl hover:shadow-2xl"
+                  ? "bg-gray-800 hover:bg-gray-700" 
+                  : "bg-white shadow-lg hover:shadow-xl"
               }`}
             >
-              <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">
+              <div className="text-6xl mb-6 group-hover:scale-110 transition-transform">
                 {item.icon}
               </div>
-              <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+              <h3 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-100">
                 {item.title}
               </h3>
-              <p className={`text-sm leading-relaxed ${
-                darkMode ? "text-gray-300" : "text-gray-600"
-              }`}>
+              <p className={`text-base leading-relaxed ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
                 {item.desc}
               </p>
             </div>
@@ -253,13 +545,13 @@ function App() {
         </div>
       </section>
 
-      {/* Destination Grid */}
-      <div className="flex flex-col items-center py-12 px-6">
-        <h2 className="text-4xl font-bold mb-3 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+      {/* Destination Grid - Assuming cards show description, not lat/lng */}
+      <div className="flex flex-col items-center py-16 px-6 bg-gradient-to-b from-gray-50 to-transparent dark:from-gray-800 dark:to-transparent">
+        <h2 className="text-4xl font-serif font-bold mb-4 text-center text-gray-800 dark:text-gray-100">
           Popular Destinations
         </h2>
-        <p className={`text-center mb-8 ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-          Choose your next adventure from our handpicked destinations
+        <p className={`text-center mb-10 text-lg ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
+          Discover handpicked adventures tailored for unforgettable memories
         </p>
         {loading ? (
           <div className="flex flex-col items-center py-12">
@@ -283,7 +575,7 @@ function App() {
                 </p>
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                  className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                 >
                   Clear Search
                 </button>
@@ -293,12 +585,12 @@ function App() {
         )}
       </div>
 
-      {/* Interactive Map */}
-      <div className="flex flex-col items-center mt-12 px-4 pb-16">
-        <h2 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-          Explore on Map
+      {/* Interactive Map - Improved: larger, better tiles, subtle shadow */}
+      <div className="flex flex-col items-center mt-12 px-6 pb-16">
+        <h2 className="text-4xl font-serif font-bold mb-10 text-center text-gray-800 dark:text-gray-100">
+          Explore on the Map
         </h2>
-        <div className="w-full max-w-7xl h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+        <div className="w-full max-w-7xl h-[600px] rounded-2xl overflow-hidden shadow-xl">
           <MapContainer 
             center={mapCenter || [20, 0]} 
             zoom={mapCenter ? 10 : 2} 
@@ -316,21 +608,21 @@ function App() {
             {filteredDestinations.map((place) => (
               <Marker key={place.id} position={[place.lat, place.lng]}>
                 <Popup>
-                  <div className="text-center p-2">
+                  <div className="text-center p-4 max-w-xs">
                     <img 
                       src={place.image} 
                       alt={place.name} 
-                      className="w-full h-24 object-cover rounded-lg mb-2"
+                      className="w-full h-32 object-cover rounded-md mb-3"
                       onError={(e) => {
                         e.target.src = place.fallbackImage;
                       }}
                     />
-                    <strong className="text-lg block">{place.name}</strong>
-                    <p className="text-sm my-1">{place.description}</p>
-                    <p className="font-bold text-blue-600">{place.price} • {place.duration}</p>
+                    <strong className="text-xl block text-gray-800 dark:text-gray-100">{place.name}</strong>
+                    <p className="text-sm my-2 text-gray-600 dark:text-gray-300">{place.description}</p>
+                    <p className="font-semibold text-blue-600 dark:text-blue-400">{place.price} • {place.duration}</p>
                     <button
                       onClick={() => handleSelectDestination(place)}
-                      className="mt-2 px-4 py-1 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600"
+                      className="mt-3 px-5 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700"
                     >
                       Book Now
                     </button>
@@ -356,32 +648,60 @@ function App() {
         />
       )}
 
-      {/* Footer */}
-      <footer className={`mt-16 py-12 text-center ${
+      {/* Footer - Improved: functional links, cleaner design, no APIs added (using standard links) */}
+      <footer className={`mt-16 py-12 text-center border-t ${
         darkMode 
-          ? "bg-gray-900 border-t border-gray-800" 
-          : "bg-gradient-to-br from-gray-100 to-gray-50"
+          ? "bg-gray-900 border-gray-800" 
+          : "bg-gray-50 border-gray-200"
       }`}>
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-3xl font-serif font-bold mb-4 text-gray-800 dark:text-gray-100">
             Travel Next
           </div>
-          <p className={`mb-6 ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
+          <p className={`mb-8 text-lg ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
             Your journey starts here. Explore the world with confidence.
           </p>
-          <div className="flex justify-center gap-4 mb-6">
-            {["📧 Email", "📱 WhatsApp", "💬 Live Chat", "📞 Call"].map((contact, idx) => (
-              <button 
-                key={idx}
-                className={`px-4 py-2 rounded-lg transition-all hover:scale-105 ${
-                  darkMode 
-                    ? "bg-gray-800 hover:bg-gray-700" 
-                    : "bg-white hover:bg-gray-50 shadow"
-                }`}
-              >
-                {contact}
-              </button>
-            ))}
+          <div className="flex justify-center gap-6 mb-8">
+            <a 
+              href="mailto:fardaadbusiness@gmail.com"
+              className={`px-5 py-3 rounded-lg transition-all hover:scale-105 flex items-center gap-2 ${
+                darkMode 
+                  ? "bg-gray-800 hover:bg-gray-700" 
+                  : "bg-white hover:bg-gray-50 shadow"
+              }`}
+            >
+              📧 Email
+            </a>
+            <a 
+              href="https://wa.me/61483894346"
+              className={`px-5 py-3 rounded-lg transition-all hover:scale-105 flex items-center gap-2 ${
+                darkMode 
+                  ? "bg-gray-800 hover:bg-gray-700" 
+                  : "bg-white hover:bg-gray-50 shadow"
+              }`}
+            >
+              📱 WhatsApp
+            </a>
+            <a 
+              href="https://wa.me/61483894346?text=Hi,%20I'd%20like%20to%20start%20a%20live%20chat."
+              className={`px-5 py-3 rounded-lg transition-all hover:scale-105 flex items-center gap-2 ${
+                darkMode 
+                  ? "bg-gray-800 hover:bg-gray-700" 
+                  : "bg-white hover:bg-gray-50 shadow"
+              }`}
+            >
+              💬 Live Chat
+            </a>
+            <a 
+              href="tel:+61483894346"
+              className={`px-5 py-3 rounded-lg transition-all hover:scale-105 flex items-center gap-2 ${
+                darkMode 
+                  ? "bg-gray-800 hover:bg-gray-700" 
+                  : "bg-white hover:bg-gray-50 shadow"
+              }`}
+            >
+              📞 Call
+            </a>
           </div>
           <p className={`text-sm ${darkMode ? "text-gray-500" : "text-gray-500"}`}>
             © {new Date().getFullYear()} Travel Next — Plan your journey, live your story.
@@ -391,8 +711,15 @@ function App() {
         </div>
       </footer>
 
-      {/* Add animations */}
-      <style jsx>{`
+      {/* Add animations and global styles */}
+      <style jsx global>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
+        body {
+          font-family: 'Roboto', sans-serif;
+        }
+        h1, h2, h3 {
+          font-family: 'Playfair Display', serif;
+        }
         @keyframes fadeInUp {
           from {
             opacity: 0;
