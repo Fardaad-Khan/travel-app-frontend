@@ -13,6 +13,32 @@ import tokyoImg from "./assets/tokyo.jpg";
 import parisImg from "./assets/paris.jpg";
 import sydneyImg from "./assets/sydney.jpg";
 import dubaiImg from "./assets/dubai.jpg";
+import amsterdamImg from "./assets/amsterdam.jpg";
+import bangkokImg from "./assets/bangkok.jpg";
+import barcelonaImg from "./assets/barcelona.jpg";
+import berlinImg from "./assets/berlin.jpg";
+import boraImg from "./assets/bora.jpg";
+import cairoImg from "./assets/cairo.jpg";
+import capetownImg from "./assets/capetown.jpg";
+import chinaImg from "./assets/china.jpg";
+import grandImg from "./assets/grand.jpg";
+import hongKongImg from "./assets/hong kong.jpg";
+import istanbulImg from "./assets/istanbul.jpg";
+import kyotoImg from "./assets/kyoto.jpg";
+import londonImg from "./assets/london.jpg";
+import machaImg from "./assets/macha.jpg";
+import mexicoImg from "./assets/mexico.jpg";
+import moscowImg from "./assets/moscow.jpg";
+import newYorkImg from "./assets/new york.jpg";
+import pragueImg from "./assets/prague.jpg";
+import rioImg from "./assets/rio.jpg";
+import romeImg from "./assets/rome.jpg";
+import santoriniImg from "./assets/santorini.jpg";
+import seoulImg from "./assets/seoul.jpg";
+import singaporeImg from "./assets/singapore.jpg";
+import tajmahalImg from "./assets/tajmahal.jpg";
+import veniceImg from "./assets/venice.jpg";
+import viennaImg from "./assets/vienna.jpg";
 
 // Import the travel background image from src/assets
 import travelBg from "./assets/travel-bg.jpg";
@@ -59,8 +85,6 @@ function App() {
 
   useEffect(() => {
     // Expanded list of destinations around the world
-    // Rotate between the 4 images
-    const images = [tokyoImg, parisImg, sydneyImg, dubaiImg];
     const fallbackImages = [
       "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=600&fit=crop",
@@ -401,10 +425,44 @@ function App() {
       }
     ];
 
-    // Assign rotating images
+    // Map destination names to their specific images
+    const imageMap = {
+      "Tokyo": tokyoImg,
+      "Paris": parisImg,
+      "Sydney": sydneyImg,
+      "Dubai": dubaiImg,
+      "New York": newYorkImg,
+      "London": londonImg,
+      "Rome": romeImg,
+      "Barcelona": barcelonaImg,
+      "Rio de Janeiro": rioImg,
+      "Cape Town": capetownImg,
+      "Bangkok": bangkokImg,
+      "Istanbul": istanbulImg,
+      "Hong Kong": hongKongImg,
+      "Singapore": singaporeImg,
+      "Amsterdam": amsterdamImg,
+      "Prague": pragueImg,
+      "Vienna": viennaImg,
+      "Berlin": berlinImg,
+      "Moscow": moscowImg,
+      "Cairo": cairoImg,
+      "Machu Picchu": machaImg,
+      "Great Wall of China": chinaImg,
+      "Taj Mahal": tajmahalImg,
+      "Bora Bora": boraImg,
+      "Grand Canyon": grandImg,
+      "Santorini": santoriniImg,
+      "Kyoto": kyotoImg,
+      "Venice": veniceImg,
+      "Seoul": seoulImg,
+      "Mexico City": mexicoImg,
+    };
+
+    // Assign specific images and fallbacks
     const enhancedDests = destList.map((dest, index) => ({
       ...dest,
-      image: images[index % 4],
+      image: imageMap[dest.name] || tokyoImg, // Fallback to tokyoImg if no match
       fallbackImage: fallbackImages[index % 4]
     }));
 
